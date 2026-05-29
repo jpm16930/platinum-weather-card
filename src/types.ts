@@ -19,6 +19,7 @@ export type layoutDays = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export type extendedDays = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export type pressureDecimals = 0 | 1 | 2 | 3;
 export type timeFormat = 'system' | '12hour' | '24hour';
+export type unitSystem = 'metric' | 'imperial';
 
 // TODO Add your configuration elements here for type-checking
 export interface WeatherCardConfig extends LovelaceCardConfig {
@@ -125,6 +126,13 @@ export interface WeatherCardConfig extends LovelaceCardConfig {
   option_tooltips?: boolean;
   old_daily_format?: boolean;
   option_show_beaufort?: boolean;
+
+  // Forecast subscription (replaces attributes.forecast for HA 2023.9+)
+  weather_entity?: string;
+  forecast_type?: 'daily' | 'hourly' | 'twice_daily';
+
+  // Per-card unit system override
+  unit_system?: unitSystem;
 
   entity?: string;
   tap_action?: ActionConfig;
