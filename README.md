@@ -1,19 +1,15 @@
 # Platinum Weather Card by [@makin-things](https://www.github.com/makin-things)
 
-A highly configurable weather card with a graphical configuration.
+This is a fork of Makin-Things/platinum-weather-card, a highly configurable weather card with a graphical configuration.
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
-[![GitHub Release][releases-shield]][releases]
-[![License][license-shield]](LICENSE.md)
-![Maintenance](https://img.shields.io/maintenance/yes/2024?style=for-the-badge)
+There Are some some ississues that were fixed by https://github.com/tommyjlong/platinum-weather-card, however, tommyjlong is not supporting the fork. I had a requirement to have two weather cards, one metric and one imperial, so merged tommyjlong's changes into the fork and added the ability to have cards with different UOM.
+
 
 # Support
 
-Hey dude! Help me out for a couple of :beers: or a :coffee:!
+I am not planning on supporting / maintainging this other than for personal use, unless there are people who are interested.
 
-[![coffee](https://www.buymeacoffee.com/assets/img/custom_images/black_img.png)](https://www.buymeacoffee.com/theOzzieRat)
-
-If you like this card and would like to see me continue development of it a small donation would be greatly appreciated. I have already spent hundreds of hours working on this.
+If you like this card and would like to see me continue development let me know, donations appreciate as I have already spent millions of Claude tokens on this ;-)
 
 # Need Help?
 
