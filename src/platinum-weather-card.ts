@@ -256,6 +256,9 @@ export class PlatinumWeatherCard extends LitElement {
         // check if we have a weather domain as the entity
         if (this._config[entityName].match('^weather.')) {
           // we are dealing with the weather domain
+          // Skip validation until the WebSocket subscription has delivered data —
+          // _forecastData is undefined during the initial render.
+          if (!this._forecastData || this._forecastData.length === 0) break;
           // check that attributes exist for the first day
           const forecastDate = new Date();
           forecastDate.setDate(forecastDate.getDate() + 1);
@@ -264,26 +267,23 @@ export class PlatinumWeatherCard extends LitElement {
               if (this._getForecastPropFromWeather(entity.attributes.forecast, forecastDate, 'condition') === undefined) {
                 this._error.push(`'${entityName} attribute forecast[1].condition not found`);
               }
-              break
+              break;
             case 'entity_forecast_min_1':
               if (this._getForecastPropFromWeather(entity.attributes.forecast, forecastDate, 'templow') === undefined) {
                 this._error.push(`'${entityName} attribute forecast[1].templow not found`);
               }
-              break
+              break;
             case 'entity_forecast_max_1':
               if (this._getForecastPropFromWeather(entity.attributes.forecast, forecastDate, 'temperature') === undefined) {
                 this._error.push(`'${entityName} attribute forecast[1].temperature not found`);
               }
               break;
             case 'entity_pop_1':
-              if (this._getForecastPropFromWeather(entity.attributes.forecast, forecastDate, 'precipitation_probability') === undefined) {
-                this._error.push(`'${entityName} attribute forecast[1].precipitation_probability not found`);
-              }
+              // precipitation_probability is optional — not all integrations provide it.
+              // Missing values render as '---', which is correct behaviour.
               break;
             case 'entity_pos_1':
-              if (this._getForecastPropFromWeather(entity.attributes.forecast, forecastDate, 'precipitation') === undefined) {
-                this._error.push(`'${entityName} attribute forecast[1].precipitation not found`);
-              }
+              // precipitation is optional — same as above.
               break;
           }
         } else {
