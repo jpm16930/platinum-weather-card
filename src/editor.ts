@@ -1001,7 +1001,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
     return html`
       <div class="side-by-side">
         <ha-select label="Overview Layout" .configValue=${'overview_layout'}
-          .value=${this._overview_layout} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()} @click=${this._valueChanged}>
+          .value=${this._overview_layout} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="complete">complete</mwc-list-item>
           <mwc-list-item value="observations">observations</mwc-list-item>
@@ -1104,81 +1104,81 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
     return html`
       <div class="side-by-side">
         <ha-select label="Slot Left 1" .configValue=${'slot_l1'} .value=${this._slot_l1 || 'forecast_max'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
         <ha-select label="Slot Right 1" .configValue=${'slot_r1'} .value=${this._slot_r1 || 'popforecast'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 2" .configValue=${'slot_l2'} .value=${this._slot_l2 || 'forecast_min'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
         <ha-select label="Slot Right 2" .configValue=${'slot_r2'} .value=${this._slot_r2 || 'humidity'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 3" .configValue=${'slot_l3'} .value=${this._slot_l3 || 'wind'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
         <ha-select label="Slot Right 3" .configValue=${'slot_r3'} .value=${this._slot_r3 || 'uv_summary'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 4" .configValue=${'slot_l4'} .value=${this._slot_l4 || 'pressure'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
         <ha-select label="Slot Right 4" .configValue=${'slot_r4'} .value=${this._slot_r4 || 'fire_danger'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 5" .configValue=${'slot_l5'} .value=${this._slot_l5 || 'sun_next'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
         <ha-select label="Slot Right 5" .configValue=${'slot_r5'} .value=${this._slot_r5 || 'sun_following'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 6" .configValue=${'slot_l6'} .value=${this._slot_l6 || 'remove'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
         <ha-select label="Slot Right 6" .configValue=${'slot_r6'} .value=${this._slot_r6 || 'remove'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 7" .configValue=${'slot_l7'} .value=${this._slot_l7 || 'remove'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
         <ha-select label="Slot Right 7" .configValue=${'slot_r7'} .value=${this._slot_r7 || 'remove'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 8" .configValue=${'slot_l8'} .value=${this._slot_l8 || 'remove'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
         <ha-select label="Slot Right 8" .configValue=${'slot_r8'} .value=${this._slot_r8 || 'remove'}
-          @click=${this._valueChanged} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
+          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           ${slotValues}
         </ha-select>
       </div>
@@ -1197,7 +1197,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
           </ha-formfield>
         </div>
         <ha-select label="Pressure Decimals" .configValue=${'option_pressure_decimals'}
-          .value=${this._option_pressure_decimals ? this._option_pressure_decimals.toString() : null} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()} @click=${this._valueChangedNumber}>
+          .value=${this._option_pressure_decimals ? this._option_pressure_decimals.toString() : null} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="0">0</mwc-list-item>
           <mwc-list-item value="1">1</mwc-list-item>
@@ -1290,7 +1290,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
     return html`
       <div class="side-by-side">
         <ha-select label="Daily Forecast Layout" .configValue=${'daily_forecast_layout'}
-          .value=${this._daily_forecast_layout} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()} @click=${this._valueChanged}>
+          .value=${this._daily_forecast_layout} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="horizontal">horizontal</mwc-list-item>
           <mwc-list-item value="vertical">vertical</mwc-list-item>
@@ -1299,7 +1299,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
       </div>
       <div class="side-by-side">
         <ha-select label="Daily Forecast Days" .configValue=${'daily_forecast_days'}
-          .value=${this._daily_forecast_days ? this._daily_forecast_days.toString() : null} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()} @click=${this._valueChangedNumber}>
+          .value=${this._daily_forecast_days ? this._daily_forecast_days.toString() : null} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="1">1</mwc-list-item>
           <mwc-list-item value="2">2</mwc-list-item>
@@ -1312,7 +1312,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
         </ha-select>
         ${this._daily_forecast_layout === 'vertical' ? html`<ha-select label="Daily Extended Days"
           .configValue=${'daily_extended_forecast_days'} .value=${this._daily_extended_forecast_days !== null ?
-          this._daily_extended_forecast_days.toString() : null} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()} @click=${this._valueChangedNumber}>
+          this._daily_extended_forecast_days.toString() : null} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="0">0</mwc-list-item>
           <mwc-list-item value="1">1</mwc-list-item>
@@ -1361,7 +1361,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
         <div></div>
       </div>
       <div class="side-by-side">
-        <ha-select label="Time Format" .configValue=${'option_time_format'} .value=${this._option_time_format} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()} @click=${this._valueChanged}>
+        <ha-select label="Time Format" .configValue=${'option_time_format'} .value=${this._option_time_format} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="system">System</mwc-list-item>
           <mwc-list-item value="12hour">12 hour</mwc-list-item>
@@ -1371,7 +1371,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
         </ha-textfield>
       </div>
       <div class="side-by-side">
-        <ha-select label="Unit System" .configValue=${'unit_system'} .value=${this._unit_system} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()} @click=${(ev) => { console.log('[PWC] unit_system click target.value=' + ev.target?.value + ' configValue=' + ev.target?.configValue); this._valueChanged(ev); }}>
+        <ha-select label="Unit System" .configValue=${'unit_system'} .value=${this._unit_system} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="metric">Metric</mwc-list-item>
           <mwc-list-item value="imperial">Imperial</mwc-list-item>
@@ -1681,6 +1681,35 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
       }
     }
     fireEvent(this, 'config-changed', { config: this.sortObjectByKeys(this._config) });
+  }
+
+  override updated(changedProps: Map<string, unknown>): void {
+    super.updated(changedProps);
+    // LitElement template event bindings on ha-select don't fire in HA 2026+.
+    // Attach click listeners programmatically instead — confirmed working via diagnostics.
+    const numberConfigs = new Set(['option_pressure_decimals', 'daily_forecast_days', 'daily_extended_forecast_days']);
+    this.renderRoot.querySelectorAll('ha-select').forEach((el: any) => {
+      if (el._pwcClickAttached) return;
+      el._pwcClickAttached = true;
+      el.addEventListener('click', () => {
+        const value = el.value;
+        const configValue = el.configValue;
+        console.log('[PWC] updated() click handler: configValue=' + configValue + ' value=' + value);
+        if (!configValue || !this._config || !this.hass) return;
+        if (this[`_${configValue}`] === value) return;
+        if (value === '' || value === null || value === undefined) {
+          const tmpConfig = { ...this._config };
+          delete tmpConfig[configValue];
+          this._config = tmpConfig;
+        } else {
+          this._config = {
+            ...this._config,
+            [configValue]: numberConfigs.has(configValue) ? Number(value) : value,
+          };
+        }
+        fireEvent(this, 'config-changed', { config: this.sortObjectByKeys(this._config) });
+      });
+    });
   }
 
   static styles: CSSResultGroup = css`
