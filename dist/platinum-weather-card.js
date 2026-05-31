@@ -1987,7 +1987,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
     `}_optionOverviewEditor(){return z`
       <div class="side-by-side">
         <ha-select label="Overview Layout" .configValue=${"overview_layout"}
-          .value=${this._overview_layout} @closed=${t=>t.stopPropagation()} @selected=${this._valueChanged}>
+          .value=${this._overview_layout} @closed=${t=>t.stopPropagation()} @click=${this._valueChanged}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="complete">complete</mwc-list-item>
           <mwc-list-item value="observations">observations</mwc-list-item>
@@ -2072,81 +2072,81 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
       <mwc-list-item value="remove">Remove slot</mwc-list-item>`;return z`
       <div class="side-by-side">
         <ha-select label="Slot Left 1" .configValue=${"slot_l1"} .value=${this._slot_l1||"forecast_max"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 1" .configValue=${"slot_r1"} .value=${this._slot_r1||"popforecast"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 2" .configValue=${"slot_l2"} .value=${this._slot_l2||"forecast_min"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 2" .configValue=${"slot_r2"} .value=${this._slot_r2||"humidity"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 3" .configValue=${"slot_l3"} .value=${this._slot_l3||"wind"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 3" .configValue=${"slot_r3"} .value=${this._slot_r3||"uv_summary"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 4" .configValue=${"slot_l4"} .value=${this._slot_l4||"pressure"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 4" .configValue=${"slot_r4"} .value=${this._slot_r4||"fire_danger"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 5" .configValue=${"slot_l5"} .value=${this._slot_l5||"sun_next"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 5" .configValue=${"slot_r5"} .value=${this._slot_r5||"sun_following"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 6" .configValue=${"slot_l6"} .value=${this._slot_l6||"remove"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 6" .configValue=${"slot_r6"} .value=${this._slot_r6||"remove"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 7" .configValue=${"slot_l7"} .value=${this._slot_l7||"remove"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 7" .configValue=${"slot_r7"} .value=${this._slot_r7||"remove"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 8" .configValue=${"slot_l8"} .value=${this._slot_l8||"remove"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 8" .configValue=${"slot_r8"} .value=${this._slot_r8||"remove"}
-          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @click=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
@@ -2161,7 +2161,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
           </ha-formfield>
         </div>
         <ha-select label="Pressure Decimals" .configValue=${"option_pressure_decimals"}
-          .value=${this._option_pressure_decimals?this._option_pressure_decimals.toString():null} @closed=${t=>t.stopPropagation()} @selected=${this._valueChangedNumber}>
+          .value=${this._option_pressure_decimals?this._option_pressure_decimals.toString():null} @closed=${t=>t.stopPropagation()} @click=${this._valueChangedNumber}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="0">0</mwc-list-item>
           <mwc-list-item value="1">1</mwc-list-item>
@@ -2238,7 +2238,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
     `}_optionDailyForecastEditor(){return z`
       <div class="side-by-side">
         <ha-select label="Daily Forecast Layout" .configValue=${"daily_forecast_layout"}
-          .value=${this._daily_forecast_layout} @closed=${t=>t.stopPropagation()} @selected=${this._valueChanged}>
+          .value=${this._daily_forecast_layout} @closed=${t=>t.stopPropagation()} @click=${this._valueChanged}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="horizontal">horizontal</mwc-list-item>
           <mwc-list-item value="vertical">vertical</mwc-list-item>
@@ -2247,7 +2247,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
       </div>
       <div class="side-by-side">
         <ha-select label="Daily Forecast Days" .configValue=${"daily_forecast_days"}
-          .value=${this._daily_forecast_days?this._daily_forecast_days.toString():null} @closed=${t=>t.stopPropagation()} @selected=${this._valueChangedNumber}>
+          .value=${this._daily_forecast_days?this._daily_forecast_days.toString():null} @closed=${t=>t.stopPropagation()} @click=${this._valueChangedNumber}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="1">1</mwc-list-item>
           <mwc-list-item value="2">2</mwc-list-item>
@@ -2259,7 +2259,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
             <mwc-list-item value="7">7</mwc-list-item>`:z``}
         </ha-select>
         ${"vertical"===this._daily_forecast_layout?z`<ha-select label="Daily Extended Days"
-          .configValue=${"daily_extended_forecast_days"} .value=${null!==this._daily_extended_forecast_days?this._daily_extended_forecast_days.toString():null} @closed=${t=>t.stopPropagation()} @selected=${this._valueChangedNumber}>
+          .configValue=${"daily_extended_forecast_days"} .value=${null!==this._daily_extended_forecast_days?this._daily_extended_forecast_days.toString():null} @closed=${t=>t.stopPropagation()} @click=${this._valueChangedNumber}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="0">0</mwc-list-item>
           <mwc-list-item value="1">1</mwc-list-item>
@@ -2304,7 +2304,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
         <div></div>
       </div>
       <div class="side-by-side">
-        <ha-select label="Time Format" .configValue=${"option_time_format"} .value=${this._option_time_format} @closed=${t=>t.stopPropagation()} @selected=${this._valueChanged}>
+        <ha-select label="Time Format" .configValue=${"option_time_format"} .value=${this._option_time_format} @closed=${t=>t.stopPropagation()} @click=${this._valueChanged}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="system">System</mwc-list-item>
           <mwc-list-item value="12hour">12 hour</mwc-list-item>
@@ -2314,7 +2314,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
         </ha-textfield>
       </div>
       <div class="side-by-side">
-        <ha-select label="Unit System" .configValue=${"unit_system"} .value=${this._unit_system} @closed=${t=>t.stopPropagation()} @selected=${this._valueChanged}>
+        <ha-select label="Unit System" .configValue=${"unit_system"} .value=${this._unit_system} @closed=${t=>t.stopPropagation()} @click=${this._valueChanged}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="metric">Metric</mwc-list-item>
           <mwc-list-item value="imperial">Imperial</mwc-list-item>
