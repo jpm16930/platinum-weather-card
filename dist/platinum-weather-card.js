@@ -1987,7 +1987,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
     `}_optionOverviewEditor(){return z`
       <div class="side-by-side">
         <ha-select label="Overview Layout" .configValue=${"overview_layout"}
-          .value=${this._overview_layout} @closed=${t=>t.stopPropagation()} @value-changed=${this._valueChanged}>
+          .value=${this._overview_layout} @closed=${t=>t.stopPropagation()} @selected=${this._valueChanged}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="complete">complete</mwc-list-item>
           <mwc-list-item value="observations">observations</mwc-list-item>
@@ -2072,81 +2072,81 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
       <mwc-list-item value="remove">Remove slot</mwc-list-item>`;return z`
       <div class="side-by-side">
         <ha-select label="Slot Left 1" .configValue=${"slot_l1"} .value=${this._slot_l1||"forecast_max"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 1" .configValue=${"slot_r1"} .value=${this._slot_r1||"popforecast"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 2" .configValue=${"slot_l2"} .value=${this._slot_l2||"forecast_min"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 2" .configValue=${"slot_r2"} .value=${this._slot_r2||"humidity"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 3" .configValue=${"slot_l3"} .value=${this._slot_l3||"wind"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 3" .configValue=${"slot_r3"} .value=${this._slot_r3||"uv_summary"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 4" .configValue=${"slot_l4"} .value=${this._slot_l4||"pressure"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 4" .configValue=${"slot_r4"} .value=${this._slot_r4||"fire_danger"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 5" .configValue=${"slot_l5"} .value=${this._slot_l5||"sun_next"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 5" .configValue=${"slot_r5"} .value=${this._slot_r5||"sun_following"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 6" .configValue=${"slot_l6"} .value=${this._slot_l6||"remove"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 6" .configValue=${"slot_r6"} .value=${this._slot_r6||"remove"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 7" .configValue=${"slot_l7"} .value=${this._slot_l7||"remove"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 7" .configValue=${"slot_r7"} .value=${this._slot_r7||"remove"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
       <div class="side-by-side">
         <ha-select label="Slot Left 8" .configValue=${"slot_l8"} .value=${this._slot_l8||"remove"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
         <ha-select label="Slot Right 8" .configValue=${"slot_r8"} .value=${this._slot_r8||"remove"}
-          @value-changed=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
+          @selected=${this._valueChanged} @closed=${t=>t.stopPropagation()}>
           ${t}
         </ha-select>
       </div>
@@ -2161,7 +2161,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
           </ha-formfield>
         </div>
         <ha-select label="Pressure Decimals" .configValue=${"option_pressure_decimals"}
-          .value=${this._option_pressure_decimals?this._option_pressure_decimals.toString():null} @closed=${t=>t.stopPropagation()} @value-changed=${this._valueChangedNumber}>
+          .value=${this._option_pressure_decimals?this._option_pressure_decimals.toString():null} @closed=${t=>t.stopPropagation()} @selected=${this._valueChangedNumber}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="0">0</mwc-list-item>
           <mwc-list-item value="1">1</mwc-list-item>
@@ -2238,7 +2238,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
     `}_optionDailyForecastEditor(){return z`
       <div class="side-by-side">
         <ha-select label="Daily Forecast Layout" .configValue=${"daily_forecast_layout"}
-          .value=${this._daily_forecast_layout} @closed=${t=>t.stopPropagation()} @value-changed=${this._valueChanged}>
+          .value=${this._daily_forecast_layout} @closed=${t=>t.stopPropagation()} @selected=${this._valueChanged}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="horizontal">horizontal</mwc-list-item>
           <mwc-list-item value="vertical">vertical</mwc-list-item>
@@ -2247,7 +2247,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
       </div>
       <div class="side-by-side">
         <ha-select label="Daily Forecast Days" .configValue=${"daily_forecast_days"}
-          .value=${this._daily_forecast_days?this._daily_forecast_days.toString():null} @closed=${t=>t.stopPropagation()} @value-changed=${this._valueChangedNumber}>
+          .value=${this._daily_forecast_days?this._daily_forecast_days.toString():null} @closed=${t=>t.stopPropagation()} @selected=${this._valueChangedNumber}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="1">1</mwc-list-item>
           <mwc-list-item value="2">2</mwc-list-item>
@@ -2259,7 +2259,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
             <mwc-list-item value="7">7</mwc-list-item>`:z``}
         </ha-select>
         ${"vertical"===this._daily_forecast_layout?z`<ha-select label="Daily Extended Days"
-          .configValue=${"daily_extended_forecast_days"} .value=${null!==this._daily_extended_forecast_days?this._daily_extended_forecast_days.toString():null} @closed=${t=>t.stopPropagation()} @value-changed=${this._valueChangedNumber}>
+          .configValue=${"daily_extended_forecast_days"} .value=${null!==this._daily_extended_forecast_days?this._daily_extended_forecast_days.toString():null} @closed=${t=>t.stopPropagation()} @selected=${this._valueChangedNumber}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="0">0</mwc-list-item>
           <mwc-list-item value="1">1</mwc-list-item>
@@ -2304,7 +2304,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
         <div></div>
       </div>
       <div class="side-by-side">
-        <ha-select label="Time Format" .configValue=${"option_time_format"} .value=${this._option_time_format} @closed=${t=>t.stopPropagation()} @value-changed=${this._valueChanged}>
+        <ha-select label="Time Format" .configValue=${"option_time_format"} .value=${this._option_time_format} @closed=${t=>t.stopPropagation()} @selected=${this._valueChanged}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="system">System</mwc-list-item>
           <mwc-list-item value="12hour">12 hour</mwc-list-item>
@@ -2314,7 +2314,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
         </ha-textfield>
       </div>
       <div class="side-by-side">
-        <ha-select label="Unit System" .configValue=${"unit_system"} .value=${this._unit_system} @closed=${t=>t.stopPropagation()} @value-changed=${this._valueChanged}>
+        <ha-select label="Unit System" .configValue=${"unit_system"} .value=${this._unit_system} @closed=${t=>t.stopPropagation()} @selected=${this._valueChanged}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="metric">Metric</mwc-list-item>
           <mwc-list-item value="imperial">Imperial</mwc-list-item>
@@ -2406,7 +2406,7 @@ const An=ct`.mdc-floating-label{-moz-osx-font-smoothing:grayscale;-webkit-font-s
               </ha-icon-button>
             </div>
           </div>
-        `}return z``}render(){if(!this.hass||!this._helpers)return z``;if(this._subElementEditor)return this._renderSubElementEditor();const t=[],e=this._section_order||[];return e.forEach(((i,o)=>{t.push(this.getConfigBlock(i,0===o,o+1===e.length))})),t.push(this.getConfigBlock("global_options",!1,!1)),z`${t}`}_initialize(){void 0!==this.hass&&void 0!==this._config&&void 0!==this._helpers&&(this._initialized=!0)}async loadCardHelpers(){this._helpers=await window.loadCardHelpers()}_valueChangedPicker(t){if(!this._config||!this.hass)return;const e=t.target,i=t.detail.value;this[`_${e.configValue}`]!==i&&(e.configValue&&(i?this._config=Object.assign(Object.assign({},this._config),{[e.configValue]:i}):(this._config=Object.assign({},this._config),delete this._config[e.configValue])),jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)}))}_editSubmenu(t){if(t.currentTarget){const e=t.currentTarget;this._subElementEditor=e.value}}_moveUp(t){if(this._config&&this.hass){if(t.currentTarget){const e=t.currentTarget;if(this._config.section_order){const t=this._config.section_order.findIndex((t=>t===e.value)),i=[...this._config.section_order];[i[t],i[t-1]]=[this._config.section_order[t-1],this._config.section_order[t]],this._config=Object.assign(Object.assign({},this._config),{section_order:i})}}jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)})}}_moveDown(t){if(this._config&&this.hass){if(t.currentTarget){const e=t.currentTarget;if(this._config.section_order){const t=this._config.section_order.findIndex((t=>t===e.value)),i=[...this._config.section_order];[i[t],i[t+1]]=[this._config.section_order[t+1],this._config.section_order[t]],this._config=Object.assign(Object.assign({},this._config),{section_order:i})}}jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)})}}_valueChanged(t){var e,i,o,n,s,a,r;if(console.log("[PWC] _valueChanged",{targetConfigValue:null===(e=t.target)||void 0===e?void 0:e.configValue,currentTargetConfigValue:null===(i=t.currentTarget)||void 0===i?void 0:i.configValue,detailValue:null===(o=t.detail)||void 0===o?void 0:o.value,targetValue:null===(n=t.target)||void 0===n?void 0:n.value,currentTargetValue:null===(s=t.currentTarget)||void 0===s?void 0:s.value,targetChecked:null===(a=t.target)||void 0===a?void 0:a.checked,eventType:t.type}),!this._config||!this.hass)return;const l=t.target,d=void 0!==(null===(r=t.detail)||void 0===r?void 0:r.value)?t.detail.value:void 0!==l.checked?l.checked:l.value;if(this[`_${l.configValue}`]!==d){if(l.configValue)if(""===d||null===d){const t=Object.assign({},this._config);delete t[l.configValue],this._config=t}else this._config=Object.assign(Object.assign({},this._config),{[l.configValue]:d});jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)})}}_valueChangedNumber(t){var e;if(!this._config||!this.hass)return;const i=t.target,o=void 0!==(null===(e=t.detail)||void 0===e?void 0:e.value)?t.detail.value:i.value;this[`_${i.configValue}`]!==o&&(i.configValue&&(""===o||null===o?delete this._config[i.configValue]:this._config=Object.assign(Object.assign({},this._config),{[i.configValue]:Number(o)})),jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)}))}};Tn.elementDefinitions=Object.assign(Object.assign(Object.assign(Object.assign({"ha-card":customElements.get("ha-card")},kn),an),un),Qe),Tn.styles=ct`
+        `}return z``}render(){if(!this.hass||!this._helpers)return z``;if(this._subElementEditor)return this._renderSubElementEditor();const t=[],e=this._section_order||[];return e.forEach(((i,o)=>{t.push(this.getConfigBlock(i,0===o,o+1===e.length))})),t.push(this.getConfigBlock("global_options",!1,!1)),z`${t}`}_initialize(){void 0!==this.hass&&void 0!==this._config&&void 0!==this._helpers&&(this._initialized=!0)}async loadCardHelpers(){this._helpers=await window.loadCardHelpers()}_valueChangedPicker(t){if(!this._config||!this.hass)return;const e=t.target,i=t.detail.value;this[`_${e.configValue}`]!==i&&(e.configValue&&(i?this._config=Object.assign(Object.assign({},this._config),{[e.configValue]:i}):(this._config=Object.assign({},this._config),delete this._config[e.configValue])),jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)}))}_editSubmenu(t){if(t.currentTarget){const e=t.currentTarget;this._subElementEditor=e.value}}_moveUp(t){if(this._config&&this.hass){if(t.currentTarget){const e=t.currentTarget;if(this._config.section_order){const t=this._config.section_order.findIndex((t=>t===e.value)),i=[...this._config.section_order];[i[t],i[t-1]]=[this._config.section_order[t-1],this._config.section_order[t]],this._config=Object.assign(Object.assign({},this._config),{section_order:i})}}jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)})}}_moveDown(t){if(this._config&&this.hass){if(t.currentTarget){const e=t.currentTarget;if(this._config.section_order){const t=this._config.section_order.findIndex((t=>t===e.value)),i=[...this._config.section_order];[i[t],i[t+1]]=[this._config.section_order[t+1],this._config.section_order[t]],this._config=Object.assign(Object.assign({},this._config),{section_order:i})}}jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)})}}_valueChanged(t){var e;if(!this._config||!this.hass)return;const i=t.target,o=void 0!==(null===(e=t.detail)||void 0===e?void 0:e.value)?t.detail.value:void 0!==i.checked?i.checked:i.value;if(this[`_${i.configValue}`]!==o){if(i.configValue)if(""===o||null===o){const t=Object.assign({},this._config);delete t[i.configValue],this._config=t}else this._config=Object.assign(Object.assign({},this._config),{[i.configValue]:o});jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)})}}_valueChangedNumber(t){var e;if(!this._config||!this.hass)return;const i=t.target,o=void 0!==(null===(e=t.detail)||void 0===e?void 0:e.value)?t.detail.value:i.value;this[`_${i.configValue}`]!==o&&(i.configValue&&(""===o||null===o?delete this._config[i.configValue]:this._config=Object.assign(Object.assign({},this._config),{[i.configValue]:Number(o)})),jt(this,"config-changed",{config:this.sortObjectByKeys(this._config)}))}};Tn.elementDefinitions=Object.assign(Object.assign(Object.assign(Object.assign({"ha-card":customElements.get("ha-card")},kn),an),un),Qe),Tn.styles=ct`
     :host {
       display: block;
               /* --mdc-menu-min-width: var(--parentWidth); */
