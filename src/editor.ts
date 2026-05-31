@@ -1371,7 +1371,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
         </ha-textfield>
       </div>
       <div class="side-by-side">
-        <ha-select label="Unit System" .configValue=${'unit_system'} .value=${this._unit_system} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()} @click=${this._valueChanged}>
+        <ha-select label="Unit System" .configValue=${'unit_system'} .value=${this._unit_system} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()} @click=${(ev) => { console.log('[PWC] unit_system click target.value=' + ev.target?.value + ' configValue=' + ev.target?.configValue); this._valueChanged(ev); }}>
           <mwc-list-item></mwc-list-item>
           <mwc-list-item value="metric">Metric</mwc-list-item>
           <mwc-list-item value="imperial">Imperial</mwc-list-item>
@@ -1635,6 +1635,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
   }
 
   private _valueChanged(ev): void {
+    console.log('[PWC] _valueChanged called type=' + ev.type + ' configValue=' + ev.target?.configValue + ' targetValue=' + ev.target?.value + ' detailValue=' + ev.detail?.value);
     if (!this._config || !this.hass) {
       return;
     }
