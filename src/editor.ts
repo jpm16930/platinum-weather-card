@@ -1690,7 +1690,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
     if (!this._config || !this.hass) return;
     const numberConfigs = new Set(['option_pressure_decimals', 'daily_forecast_days', 'daily_extended_forecast_days']);
     let changed = false;
-    let newConfig = { ...this._config };
+    const newConfig = { ...this._config };
     this.renderRoot.querySelectorAll('ha-select').forEach((el: any) => {
       const configValue = el.configValue;
       const value = el.value;
