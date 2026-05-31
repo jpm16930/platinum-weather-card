@@ -1635,6 +1635,15 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
   }
 
   private _valueChanged(ev): void {
+    console.log('[PWC] _valueChanged', {
+      targetConfigValue: ev.target?.configValue,
+      currentTargetConfigValue: ev.currentTarget?.configValue,
+      detailValue: ev.detail?.value,
+      targetValue: ev.target?.value,
+      currentTargetValue: ev.currentTarget?.value,
+      targetChecked: ev.target?.checked,
+      eventType: ev.type,
+    });
     if (!this._config || !this.hass) {
       return;
     }
