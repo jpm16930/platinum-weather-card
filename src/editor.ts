@@ -1638,7 +1638,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
     if (!this._config || !this.hass) {
       return;
     }
-    const target = ev.currentTarget;
+    const target = ev.target;
     const value = ev.detail?.value !== undefined
       ? ev.detail.value
       : (target.checked !== undefined ? target.checked : target.value);
@@ -1664,7 +1664,7 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
     if (!this._config || !this.hass) {
       return;
     }
-    const target = ev.currentTarget;
+    const target = ev.target;
     const value = ev.detail?.value !== undefined ? ev.detail.value : target.value;
     if (this[`_${target.configValue}`] === value) {
       return;
