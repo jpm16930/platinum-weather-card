@@ -1683,33 +1683,42 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
     fireEvent(this, 'config-changed', { config: this.sortObjectByKeys(this._config) });
   }
 
-  override updated(changedProps: Map<string, unknown>): void {
-    super.updated(changedProps);
-    // LitElement template event bindings on ha-select don't fire in HA 2026+.
-    // Attach click listeners programmatically instead — confirmed working via diagnostics.
+  // ha-select dropdown items render in a portal outside the shadow DOM, so click events
+  // on items don't bubble through ha-select to any listener attached to it. A document-level
+  // click listener polls ha-select values after every click to detect changes.
+  private _handleGlobalClick = (): void => {
+    if (!this._config || !this.hass) return;
     const numberConfigs = new Set(['option_pressure_decimals', 'daily_forecast_days', 'daily_extended_forecast_days']);
+    let changed = false;
+    let newConfig = { ...this._config };
     this.renderRoot.querySelectorAll('ha-select').forEach((el: any) => {
-      if (el._pwcClickAttached) return;
-      el._pwcClickAttached = true;
-      el.addEventListener('click', () => {
-        const value = el.value;
-        const configValue = el.configValue;
-        console.log('[PWC] updated() click handler: configValue=' + configValue + ' value=' + value);
-        if (!configValue || !this._config || !this.hass) return;
-        if (this[`_${configValue}`] === value) return;
-        if (value === '' || value === null || value === undefined) {
-          const tmpConfig = { ...this._config };
-          delete tmpConfig[configValue];
-          this._config = tmpConfig;
-        } else {
-          this._config = {
-            ...this._config,
-            [configValue]: numberConfigs.has(configValue) ? Number(value) : value,
-          };
-        }
-        fireEvent(this, 'config-changed', { config: this.sortObjectByKeys(this._config) });
-      });
+      const configValue = el.configValue;
+      const value = el.value;
+      console.log('[PWC] global click check: configValue=' + configValue + ' value=' + value + ' current=' + this[`_${configValue}`]);
+      if (!configValue) return;
+      if (this[`_${configValue}`] === value) return;
+      changed = true;
+      if (value === '' || value === null || value === undefined) {
+        delete newConfig[configValue];
+      } else {
+        newConfig[configValue] = numberConfigs.has(configValue) ? Number(value) : value;
+      }
     });
+    if (changed) {
+      console.log('[PWC] config update triggered');
+      this._config = newConfig;
+      fireEvent(this, 'config-changed', { config: this.sortObjectByKeys(this._config) });
+    }
+  };
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    document.addEventListener('click', this._handleGlobalClick);
+  }
+
+  override disconnectedCallback(): void {
+    super.disconnectedCallback();
+    document.removeEventListener('click', this._handleGlobalClick);
   }
 
   static styles: CSSResultGroup = css`
