@@ -701,11 +701,12 @@ export class PlatinumWeatherCard extends LitElement {
       if (this._config.entity_pos_1?.match('^weather.')) {
         const posEntity = this._config.entity_pos_1;
         const posData = this._getForecastPropFromWeather(this.hass.states[posEntity].attributes.forecast, forecastDate, 'precipitation');
-        pos = posEntity ? html`<li class="f-slot-horiz-text"><span><div class="pos">${this.hass.states[posEntity] && posData !== undefined ? posData : "---"}</div><div class="unit">${this.getUOM('precipitation')}</div></span></li>` : html``;
+        const displayPos = posData !== undefined && posData !== null ? this._toDisplayPrecipitation(Number(posData), 1) : "---";
+        pos = posEntity ? html`<li class="f-slot-horiz-text"><span><div class="pos">${this.hass.states[posEntity] && displayPos !== "---" ? displayPos : "---"}</div><div class="unit">${this.getUOM('precipitation')}</div></span></li>` : html``;
       } else {
         start = this._config.entity_pos_1 ? this._config.entity_pos_1.match(/(\d+)(?!.*\d)/g) : false;
         const posEntity = start && this._config.entity_pos_1 ? this._config.entity_pos_1.replace(/(\d+)(?!.*\d)/g, String(Number(start) + i)) : undefined;
-        pos = start ? html`<li class="f-slot-horiz-text"><span><div class="pos">${posEntity && this.hass.states[posEntity] ? this.hass.states[posEntity].state : "---"}</div><div class="unit">${this.getUOM('precipitation')}</div></span></li>` : html``;
+        pos = start ? html`<li class="f-slot-horiz-text"><span><div class="pos">${posEntity && this.hass.states[posEntity] ? this._toDisplayPrecipitation(Number(this.hass.states[posEntity].state), 1) : "---"}</div><div class="unit">${this.getUOM('precipitation')}</div></span></li>` : html``;
       }
       if (this._config.entity_summary_1?.match('^weather.')) {
         const tooltipEntity = this._config.entity_summary_1;
@@ -818,14 +819,15 @@ export class PlatinumWeatherCard extends LitElement {
       if (this._config.entity_pos_1?.match('^weather.')) {
         const posEntity = this._config.entity_pos_1;
         const posData = this._getForecastPropFromWeather(this.hass.states[posEntity].attributes.forecast, forecastDate, 'precipitation');
+        const displayPos = posData !== undefined && posData !== null ? this._toDisplayPrecipitation(Number(posData), 1) : "---";
         pos = posEntity ? html`<div class="f-slot-vert"><div class="f-label">Possible rain </div>
-        <div class="pos">${this.hass.states[posEntity] && posData !== undefined ? posData : "---"}</div><div class="unit">${this.getUOM('precipitation')}</div></div>` : html``;
+        <div class="pos">${this.hass.states[posEntity] && displayPos !== "---" ? displayPos : "---"}</div><div class="unit">${this.getUOM('precipitation')}</div></div>` : html``;
       } else {
         start = this._config.entity_pos_1 ? this._config.entity_pos_1.match(/(\d+)(?!.*\d)/g) : false;
         const posEntity = start && this._config.entity_pos_1 ? this._config.entity_pos_1.replace(/(\d+)(?!.*\d)/g, String(Number(start) + i)) : undefined;
         pos = start ? html`
           <div class="f-slot-vert"><div class="f-label">Possible rain </div>
-          <div class="pos">${posEntity && this.hass.states[posEntity] ? this.hass.states[posEntity].state : "---"}</div>
+          <div class="pos">${posEntity && this.hass.states[posEntity] ? this._toDisplayPrecipitation(Number(this.hass.states[posEntity].state), 1) : "---"}</div>
           <div class="unit">${this.getUOM('precipitation')}</div></div>` : html``;
       }
       start = this._config.entity_extended_1 && i < (this._config.daily_extended_forecast_days !== 0 ? this._config.daily_extended_forecast_days || 7 : 0) ? this._config.entity_extended_1.match(/(\d+)(?!.*\d)/g) : false;
@@ -1135,13 +1137,14 @@ export class PlatinumWeatherCard extends LitElement {
           : '---'
       : "---";
     const pop_units = pop !== "---" ? html`<div class="slot-text unit">%</div>` : html``;
-    const pos = this._config.entity_pos && this.hass.states[this._config.entity_pos] !== undefined
+    const rawPos = this._config.entity_pos && this.hass.states[this._config.entity_pos] !== undefined
       ? this._config.entity_pos.match('^weather.') === null
         ? this.hass.states[this._config.entity_pos].state
         : (this._forecastData?.[0]?.precipitation ?? this.hass.states[this._config.entity_pos].attributes.forecast?.[0]?.precipitation) !== undefined
           ? this._forecastData?.[0]?.precipitation ?? this.hass.states[this._config.entity_pos].attributes.forecast?.[0]?.precipitation
           : '---'
       : "---";
+    const pos = rawPos !== "---" ? this._toDisplayPrecipitation(Number(rawPos), 1) : "---";
     const pos_units = pos !== "---" ? html`<div class="slot-text unit">${this.getUOM('precipitation')}</div>` : html``;
     return html`
       <li>
@@ -1178,13 +1181,14 @@ export class PlatinumWeatherCard extends LitElement {
   }
 
   get slotPos(): TemplateResult {
-    const pos = this._config.entity_pos && this.hass.states[this._config.entity_pos] !== undefined
+    const rawPos = this._config.entity_pos && this.hass.states[this._config.entity_pos] !== undefined
       ? this._config.entity_pos.match('^weather.') === null
         ? this.hass.states[this._config.entity_pos].state
         : (this._forecastData?.[0]?.precipitation ?? this.hass.states[this._config.entity_pos].attributes.forecast?.[0]?.precipitation) !== undefined
           ? this._forecastData?.[0]?.precipitation ?? this.hass.states[this._config.entity_pos].attributes.forecast?.[0]?.precipitation
           : '---'
       : "---";
+    const pos = rawPos !== "---" ? this._toDisplayPrecipitation(Number(rawPos), 1) : "---";
     const units = pos !== "---" ? html`<div class="slot-text unit">${this.getUOM('precipitation')}</div>` : html``;
     return html`
       <li>
@@ -1198,13 +1202,14 @@ export class PlatinumWeatherCard extends LitElement {
   }
 
   get slotPossibleTomorrow(): TemplateResult {
-    const pos = this._config.entity_possible_tomorrow && this.hass.states[this._config.entity_possible_tomorrow] !== undefined
+    const rawPos = this._config.entity_possible_tomorrow && this.hass.states[this._config.entity_possible_tomorrow] !== undefined
       ? this._config.entity_possible_tomorrow.match('^weather.') === null
         ? this.hass.states[this._config.entity_possible_tomorrow].state
         : (this._forecastData?.[1]?.precipitation ?? this.hass.states[this._config.entity_possible_tomorrow].attributes.forecast?.[1]?.precipitation) !== undefined
           ? this._forecastData?.[1]?.precipitation ?? this.hass.states[this._config.entity_possible_tomorrow].attributes.forecast?.[1]?.precipitation
           : '---'
       : "---";
+    const pos = rawPos !== "---" ? this._toDisplayPrecipitation(Number(rawPos), 1) : "---";
     const units = pos !== "---" ? html`<div class="slot-text unit">${this.getUOM('precipitation')}</div>` : html``;
     return html`
       <li>
@@ -1599,6 +1604,38 @@ export class PlatinumWeatherCard extends LitElement {
       : celsius;
   }
 
+  private _toDisplayPrecipitation(mm: number, digits: number): string {
+    if (isNaN(mm)) return '---';
+    if (this._config.unit_system === 'imperial') {
+      return (mm * 0.0393701).toLocaleString(this.locale, { minimumFractionDigits: digits + 1, maximumFractionDigits: digits + 1 });
+    }
+    return mm.toLocaleString(this.locale, { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  }
+
+  private _toDisplayWindSpeed(kmh: number): string {
+    if (isNaN(kmh)) return '---';
+    if (this._config.unit_system === 'imperial') {
+      return Math.round(kmh * 0.621371).toLocaleString(this.locale);
+    }
+    return Math.round(kmh).toLocaleString(this.locale);
+  }
+
+  private _toDisplayPressure(hpa: number, places: number): string {
+    if (isNaN(hpa)) return '---';
+    if (this._config.unit_system === 'imperial') {
+      return (hpa * 0.02953).toLocaleString(this.locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    return hpa.toLocaleString(this.locale, { minimumFractionDigits: places, maximumFractionDigits: places });
+  }
+
+  private _toDisplayLength(km: number): string {
+    if (isNaN(km)) return '---';
+    if (this._config.unit_system === 'imperial') {
+      return (km * 0.621371).toLocaleString(this.locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    }
+    return km.toLocaleString(this.locale);
+  }
+
   get currentTemperature(): string {
     const entity = this._config.entity_temperature;
     const digits = this._config.option_show_overview_decimals === true ? 1 : 0;
@@ -1638,30 +1675,31 @@ export class PlatinumWeatherCard extends LitElement {
     const entity = this._config.entity_rainfall;
     const digits = this._config.option_today_rainfall_decimals === true ? 1 : 0;
     return entity && this.hass.states[entity]
-      ? (Number(this.hass.states[entity].state)).toLocaleString(this.locale, { minimumFractionDigits: digits, maximumFractionDigits: digits }) : '---';
+      ? this._toDisplayPrecipitation(Number(this.hass.states[entity].state), digits)
+      : '---';
   }
 
   get currentPressure(): string {
     const entity = this._config.entity_pressure;
-    var places = this._config.option_pressure_decimals ? Math.max(Math.min(this._config.option_pressure_decimals, 3), 0) : 0;
-    return entity && this.hass.states[entity]
-      ? entity.match('^weather.') === null
-        ? (Number(this.hass.states[entity].state)).toLocaleString(this.locale, { minimumFractionDigits: places, maximumFractionDigits: places })
-        : this.hass.states[entity].attributes.pressure !== undefined
-          ? (Number(this.hass.states[entity].attributes.pressure)).toLocaleString(this.locale)
-          : '---'
-      : '---';
+    const places = this._config.option_pressure_decimals ? Math.max(Math.min(this._config.option_pressure_decimals, 3), 0) : 0;
+    if (!entity || !this.hass.states[entity]) return '---';
+    const raw = entity.match('^weather.') === null
+      ? Number(this.hass.states[entity].state)
+      : this.hass.states[entity].attributes.pressure !== undefined
+        ? Number(this.hass.states[entity].attributes.pressure)
+        : null;
+    return raw !== null ? this._toDisplayPressure(raw, places) : '---';
   }
 
   get currentVisibility(): string {
     const entity = this._config.entity_visibility;
-    return entity && this.hass.states[entity]
-      ? entity.match('^weather.') === null
-        ? (Number(this.hass.states[entity].state)).toLocaleString(this.locale)
-        : this.hass.states[entity].attributes.visibility !== undefined
-          ? (Number(this.hass.states[entity].attributes.visibility)).toLocaleString(this.locale)
-          : '---'
-      : '---';
+    if (!entity || !this.hass.states[entity]) return '---';
+    const raw = entity.match('^weather.') === null
+      ? Number(this.hass.states[entity].state)
+      : this.hass.states[entity].attributes.visibility !== undefined
+        ? Number(this.hass.states[entity].attributes.visibility)
+        : null;
+    return raw !== null ? this._toDisplayLength(raw) : '---';
   }
 
   get currentWindBearing(): string {
@@ -1681,19 +1719,20 @@ export class PlatinumWeatherCard extends LitElement {
 
   get currentWindSpeed(): string {
     const entity = this._config.entity_wind_speed;
-    return entity && this.hass.states[entity]
-      ? entity.match('^weather.') === null
-        ? Math.round(Number(this.hass.states[entity].state)).toLocaleString(this.locale)
-        : this.hass.states[entity].attributes.wind_speed !== undefined
-          ? Math.round(Number(this.hass.states[entity].attributes.wind_speed)).toLocaleString(this.locale)
-          : '---'
-      : '---';
+    if (!entity || !this.hass.states[entity]) return '---';
+    const raw = entity.match('^weather.') === null
+      ? Number(this.hass.states[entity].state)
+      : this.hass.states[entity].attributes.wind_speed !== undefined
+        ? Number(this.hass.states[entity].attributes.wind_speed)
+        : null;
+    return raw !== null ? this._toDisplayWindSpeed(raw) : '---';
   }
 
   get currentWindGust(): string {
     const entity = this._config.entity_wind_gust;
     return entity && this.hass.states[entity]
-      ? Math.round(Number(this.hass.states[entity].state)).toLocaleString(this.locale) : '---';
+      ? this._toDisplayWindSpeed(Number(this.hass.states[entity].state))
+      : '---';
   }
 
   get currentWindSpeedKt(): string {
@@ -2144,7 +2183,7 @@ export class PlatinumWeatherCard extends LitElement {
       case 'ru': return "Макс сегодня";
       case 'ua': return "Макс сьогодні";
       case 'bg': return "Макс днес";
-      default: return "Forecast Max";
+      default: return "Today High";
     }
   }
 
@@ -2160,7 +2199,7 @@ export class PlatinumWeatherCard extends LitElement {
       case 'ru': return "Мин сегодня";
       case 'ua': return "Мін сьогодні";
       case 'bg': return "Мин днес";
-      default: return "Forecast Min";
+      default: return "Today Low";
     }
   }
 
@@ -2192,7 +2231,7 @@ export class PlatinumWeatherCard extends LitElement {
       case 'ru': return "Прогноз на завтра";
       case 'ua': return "Прогноз на завтра";
       case 'bg': return "Прогноза за утре";
-      default: return "Fore Tom";
+      default: return "Tomorrow";
     }
   }
 

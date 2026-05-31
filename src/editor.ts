@@ -1635,7 +1635,6 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
   }
 
   private _valueChanged(ev): void {
-    console.log('[PWC] _valueChanged called type=' + ev.type + ' configValue=' + ev.target?.configValue + ' targetValue=' + ev.target?.value + ' detailValue=' + ev.detail?.value);
     if (!this._config || !this.hass) {
       return;
     }
@@ -1694,7 +1693,6 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
     this.renderRoot.querySelectorAll('ha-select').forEach((el: any) => {
       const configValue = el.configValue;
       const value = el.value;
-      console.log('[PWC] global click check: configValue=' + configValue + ' value=' + value + ' current=' + this[`_${configValue}`]);
       if (!configValue) return;
       if (this[`_${configValue}`] === value) return;
       changed = true;
@@ -1705,7 +1703,6 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
       }
     });
     if (changed) {
-      console.log('[PWC] config update triggered');
       this._config = newConfig;
       fireEvent(this, 'config-changed', { config: this.sortObjectByKeys(this._config) });
     }
