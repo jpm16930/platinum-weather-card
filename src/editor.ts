@@ -1000,14 +1000,15 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
   private _optionOverviewEditor(): TemplateResult {
     return html`
       <div class="side-by-side">
-        <ha-select label="Overview Layout" .configValue=${'overview_layout'}
-          .value=${this._overview_layout} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          <mwc-list-item></mwc-list-item>
-          <mwc-list-item value="complete">complete</mwc-list-item>
-          <mwc-list-item value="observations">observations</mwc-list-item>
-          <mwc-list-item value="forecast">forecast</mwc-list-item>
-          <mwc-list-item value="title only">title only</mwc-list-item>
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Overview Layout'}
+          .selector=${{ select: { options: [
+            { value: 'complete', label: 'complete' },
+            { value: 'observations', label: 'observations' },
+            { value: 'forecast', label: 'forecast' },
+            { value: 'title only', label: 'title only' },
+          ], mode: 'dropdown' } }}
+          .value=${this._overview_layout} .configValue=${'overview_layout'}
+          @value-changed=${this._valueChanged}></ha-selector>
         <div></div>
       </div>
       <div class="side-by-side">
@@ -1071,116 +1072,102 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
   }
 
   private _sectionSlotsEditor(): TemplateResult {
-    const slotValues = html`
-      <mwc-list-item value="humidity">Current humidity</mwc-list-item>
-      <mwc-list-item value="rainfall">Today's recorded rainfall</mwc-list-item>
-      <mwc-list-item value="pressure">Current air pressure</mwc-list-item>
-      <mwc-list-item value="wind">Current wind conditions</mwc-list-item>
-      <mwc-list-item value="wind_kt">Current wind conditions kts</mwc-list-item>
-      <mwc-list-item value="visibility">Current visibility</mwc-list-item>
-      <mwc-list-item value="observed_max">Today's observed max</mwc-list-item>
-      <mwc-list-item value="observed_min">Today's observed min</mwc-list-item>
-      <mwc-list-item value="forecast_max">Today's forecast max</mwc-list-item>
-      <mwc-list-item value="forecast_min">Today's forecast min</mwc-list-item>
-      <mwc-list-item value="temp_next">Next temp min/max</mwc-list-item>
-      <mwc-list-item value="temp_following">Following temp min/max</mwc-list-item>
-      <mwc-list-item value="temp_maximums">Observed/forecast max</mwc-list-item>
-      <mwc-list-item value="temp_minimums">Observed/forecast min</mwc-list-item>
-      <mwc-list-item value="sun_next">Next sun rise/set time</mwc-list-item>
-      <mwc-list-item value="sun_following">Following sun rise/set time</mwc-list-item>
-      <mwc-list-item value="pop">Chance of rain</mwc-list-item>
-      <mwc-list-item value="popforecast">Rainfall forecast</mwc-list-item>
-      <mwc-list-item value="possible_today">Today's forecast rainfall</mwc-list-item>
-      <mwc-list-item value="possible_tomorrow">Tomorrow's forecast rainfall</mwc-list-item>
-      <mwc-list-item value="uv_summary">Today's uv forecast</mwc-list-item>
-      <mwc-list-item value="fire_danger">Today's fire danger</mwc-list-item>
-      <mwc-list-item value="custom1">Custom entity 1</mwc-list-item>
-      <mwc-list-item value="custom2">Custom entity 2</mwc-list-item>
-      <mwc-list-item value="custom3">Custom entity 3</mwc-list-item>
-      <mwc-list-item value="custom4">Custom entity 4</mwc-list-item>
-      <mwc-list-item value="empty">Blank slot</mwc-list-item>
-      <mwc-list-item value="remove">Remove slot</mwc-list-item>`;
+    const slotOptions = [
+      { value: 'humidity', label: "Current humidity" },
+      { value: 'rainfall', label: "Today's recorded rainfall" },
+      { value: 'pressure', label: "Current air pressure" },
+      { value: 'wind', label: "Current wind conditions" },
+      { value: 'wind_kt', label: "Current wind conditions kts" },
+      { value: 'visibility', label: "Current visibility" },
+      { value: 'observed_max', label: "Today's observed max" },
+      { value: 'observed_min', label: "Today's observed min" },
+      { value: 'forecast_max', label: "Today's forecast max" },
+      { value: 'forecast_min', label: "Today's forecast min" },
+      { value: 'temp_next', label: "Next temp min/max" },
+      { value: 'temp_following', label: "Following temp min/max" },
+      { value: 'temp_maximums', label: "Observed/forecast max" },
+      { value: 'temp_minimums', label: "Observed/forecast min" },
+      { value: 'sun_next', label: "Next sun rise/set time" },
+      { value: 'sun_following', label: "Following sun rise/set time" },
+      { value: 'pop', label: "Chance of rain" },
+      { value: 'popforecast', label: "Rainfall forecast" },
+      { value: 'possible_today', label: "Today's forecast rainfall" },
+      { value: 'possible_tomorrow', label: "Tomorrow's forecast rainfall" },
+      { value: 'uv_summary', label: "Today's uv forecast" },
+      { value: 'fire_danger', label: "Today's fire danger" },
+      { value: 'custom1', label: "Custom entity 1" },
+      { value: 'custom2', label: "Custom entity 2" },
+      { value: 'custom3', label: "Custom entity 3" },
+      { value: 'custom4', label: "Custom entity 4" },
+      { value: 'empty', label: "Blank slot" },
+      { value: 'remove', label: "Remove slot" },
+    ];
+    const slotSelector = { select: { options: slotOptions, mode: 'dropdown' } };
 
     return html`
       <div class="side-by-side">
-        <ha-select label="Slot Left 1" .configValue=${'slot_l1'} .value=${this._slot_l1 || 'forecast_max'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
-        <ha-select label="Slot Right 1" .configValue=${'slot_r1'} .value=${this._slot_r1 || 'popforecast'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Slot Left 1'} .selector=${slotSelector}
+          .value=${this._slot_l1 || 'forecast_max'} .configValue=${'slot_l1'}
+          @value-changed=${this._valueChanged}></ha-selector>
+        <ha-selector .hass=${this.hass} .label=${'Slot Right 1'} .selector=${slotSelector}
+          .value=${this._slot_r1 || 'popforecast'} .configValue=${'slot_r1'}
+          @value-changed=${this._valueChanged}></ha-selector>
       </div>
       <div class="side-by-side">
-        <ha-select label="Slot Left 2" .configValue=${'slot_l2'} .value=${this._slot_l2 || 'forecast_min'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
-        <ha-select label="Slot Right 2" .configValue=${'slot_r2'} .value=${this._slot_r2 || 'humidity'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Slot Left 2'} .selector=${slotSelector}
+          .value=${this._slot_l2 || 'forecast_min'} .configValue=${'slot_l2'}
+          @value-changed=${this._valueChanged}></ha-selector>
+        <ha-selector .hass=${this.hass} .label=${'Slot Right 2'} .selector=${slotSelector}
+          .value=${this._slot_r2 || 'humidity'} .configValue=${'slot_r2'}
+          @value-changed=${this._valueChanged}></ha-selector>
       </div>
       <div class="side-by-side">
-        <ha-select label="Slot Left 3" .configValue=${'slot_l3'} .value=${this._slot_l3 || 'wind'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
-        <ha-select label="Slot Right 3" .configValue=${'slot_r3'} .value=${this._slot_r3 || 'uv_summary'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Slot Left 3'} .selector=${slotSelector}
+          .value=${this._slot_l3 || 'wind'} .configValue=${'slot_l3'}
+          @value-changed=${this._valueChanged}></ha-selector>
+        <ha-selector .hass=${this.hass} .label=${'Slot Right 3'} .selector=${slotSelector}
+          .value=${this._slot_r3 || 'uv_summary'} .configValue=${'slot_r3'}
+          @value-changed=${this._valueChanged}></ha-selector>
       </div>
       <div class="side-by-side">
-        <ha-select label="Slot Left 4" .configValue=${'slot_l4'} .value=${this._slot_l4 || 'pressure'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
-        <ha-select label="Slot Right 4" .configValue=${'slot_r4'} .value=${this._slot_r4 || 'fire_danger'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Slot Left 4'} .selector=${slotSelector}
+          .value=${this._slot_l4 || 'pressure'} .configValue=${'slot_l4'}
+          @value-changed=${this._valueChanged}></ha-selector>
+        <ha-selector .hass=${this.hass} .label=${'Slot Right 4'} .selector=${slotSelector}
+          .value=${this._slot_r4 || 'fire_danger'} .configValue=${'slot_r4'}
+          @value-changed=${this._valueChanged}></ha-selector>
       </div>
       <div class="side-by-side">
-        <ha-select label="Slot Left 5" .configValue=${'slot_l5'} .value=${this._slot_l5 || 'sun_next'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
-        <ha-select label="Slot Right 5" .configValue=${'slot_r5'} .value=${this._slot_r5 || 'sun_following'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Slot Left 5'} .selector=${slotSelector}
+          .value=${this._slot_l5 || 'sun_next'} .configValue=${'slot_l5'}
+          @value-changed=${this._valueChanged}></ha-selector>
+        <ha-selector .hass=${this.hass} .label=${'Slot Right 5'} .selector=${slotSelector}
+          .value=${this._slot_r5 || 'sun_following'} .configValue=${'slot_r5'}
+          @value-changed=${this._valueChanged}></ha-selector>
       </div>
       <div class="side-by-side">
-        <ha-select label="Slot Left 6" .configValue=${'slot_l6'} .value=${this._slot_l6 || 'remove'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
-        <ha-select label="Slot Right 6" .configValue=${'slot_r6'} .value=${this._slot_r6 || 'remove'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Slot Left 6'} .selector=${slotSelector}
+          .value=${this._slot_l6 || 'remove'} .configValue=${'slot_l6'}
+          @value-changed=${this._valueChanged}></ha-selector>
+        <ha-selector .hass=${this.hass} .label=${'Slot Right 6'} .selector=${slotSelector}
+          .value=${this._slot_r6 || 'remove'} .configValue=${'slot_r6'}
+          @value-changed=${this._valueChanged}></ha-selector>
       </div>
       <div class="side-by-side">
-        <ha-select label="Slot Left 7" .configValue=${'slot_l7'} .value=${this._slot_l7 || 'remove'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
-        <ha-select label="Slot Right 7" .configValue=${'slot_r7'} .value=${this._slot_r7 || 'remove'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Slot Left 7'} .selector=${slotSelector}
+          .value=${this._slot_l7 || 'remove'} .configValue=${'slot_l7'}
+          @value-changed=${this._valueChanged}></ha-selector>
+        <ha-selector .hass=${this.hass} .label=${'Slot Right 7'} .selector=${slotSelector}
+          .value=${this._slot_r7 || 'remove'} .configValue=${'slot_r7'}
+          @value-changed=${this._valueChanged}></ha-selector>
       </div>
       <div class="side-by-side">
-        <ha-select label="Slot Left 8" .configValue=${'slot_l8'} .value=${this._slot_l8 || 'remove'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
-        <ha-select label="Slot Right 8" .configValue=${'slot_r8'} .value=${this._slot_r8 || 'remove'}
-          @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          ${slotValues}
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Slot Left 8'} .selector=${slotSelector}
+          .value=${this._slot_l8 || 'remove'} .configValue=${'slot_l8'}
+          @value-changed=${this._valueChanged}></ha-selector>
+        <ha-selector .hass=${this.hass} .label=${'Slot Right 8'} .selector=${slotSelector}
+          .value=${this._slot_r8 || 'remove'} .configValue=${'slot_r8'}
+          @value-changed=${this._valueChanged}></ha-selector>
       </div>
       ${this._optional_entities}
     `;
@@ -1196,14 +1183,16 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
             </ha-switch>
           </ha-formfield>
         </div>
-        <ha-select label="Pressure Decimals" .configValue=${'option_pressure_decimals'}
-          .value=${this._option_pressure_decimals ? this._option_pressure_decimals.toString() : null} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          <mwc-list-item></mwc-list-item>
-          <mwc-list-item value="0">0</mwc-list-item>
-          <mwc-list-item value="1">1</mwc-list-item>
-          <mwc-list-item value="2">2</mwc-list-item>
-          <mwc-list-item value="3">3</mwc-list-item>
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Pressure Decimals'}
+          .selector=${{ select: { options: [
+            { value: '0', label: '0' },
+            { value: '1', label: '1' },
+            { value: '2', label: '2' },
+            { value: '3', label: '3' },
+          ], mode: 'dropdown' } }}
+          .value=${this._option_pressure_decimals !== null ? this._option_pressure_decimals.toString() : ''}
+          .configValue=${'option_pressure_decimals'}
+          @value-changed=${this._valueChangedNumber}></ha-selector>
       </div>
       <div class="side-by-side">
         <div>
@@ -1289,40 +1278,36 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
   private _optionDailyForecastEditor(): TemplateResult {
     return html`
       <div class="side-by-side">
-        <ha-select label="Daily Forecast Layout" .configValue=${'daily_forecast_layout'}
-          .value=${this._daily_forecast_layout} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          <mwc-list-item></mwc-list-item>
-          <mwc-list-item value="horizontal">horizontal</mwc-list-item>
-          <mwc-list-item value="vertical">vertical</mwc-list-item>
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Daily Forecast Layout'}
+          .selector=${{ select: { options: [
+            { value: 'horizontal', label: 'horizontal' },
+            { value: 'vertical', label: 'vertical' },
+          ], mode: 'dropdown' } }}
+          .value=${this._daily_forecast_layout} .configValue=${'daily_forecast_layout'}
+          @value-changed=${this._valueChanged}></ha-selector>
         <div></div>
       </div>
       <div class="side-by-side">
-        <ha-select label="Daily Forecast Days" .configValue=${'daily_forecast_days'}
-          .value=${this._daily_forecast_days ? this._daily_forecast_days.toString() : null} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          <mwc-list-item></mwc-list-item>
-          <mwc-list-item value="1">1</mwc-list-item>
-          <mwc-list-item value="2">2</mwc-list-item>
-          <mwc-list-item value="3">3</mwc-list-item>
-          <mwc-list-item value="4">4</mwc-list-item>
-          <mwc-list-item value="5">5</mwc-list-item>
-          ${this._daily_forecast_layout === 'vertical' ? html`
-            <mwc-list-item value="6">6</mwc-list-item>
-            <mwc-list-item value="7">7</mwc-list-item>` : html``}
-        </ha-select>
-        ${this._daily_forecast_layout === 'vertical' ? html`<ha-select label="Daily Extended Days"
-          .configValue=${'daily_extended_forecast_days'} .value=${this._daily_extended_forecast_days !== null ?
-          this._daily_extended_forecast_days.toString() : null} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          <mwc-list-item></mwc-list-item>
-          <mwc-list-item value="0">0</mwc-list-item>
-          <mwc-list-item value="1">1</mwc-list-item>
-          <mwc-list-item value="2">2</mwc-list-item>
-          <mwc-list-item value="3">3</mwc-list-item>
-          <mwc-list-item value="4">4</mwc-list-item>
-          <mwc-list-item value="5">5</mwc-list-item>
-          <mwc-list-item value="6">6</mwc-list-item>
-          <mwc-list-item value="7">7</mwc-list-item>
-        </ha-select>` : html`<div></div>`}
+        <ha-selector .hass=${this.hass} .label=${'Daily Forecast Days'}
+          .selector=${{ select: { options: [
+            { value: '1', label: '1' }, { value: '2', label: '2' }, { value: '3', label: '3' },
+            { value: '4', label: '4' }, { value: '5', label: '5' },
+            ...(this._daily_forecast_layout === 'vertical' ? [{ value: '6', label: '6' }, { value: '7', label: '7' }] : []),
+          ], mode: 'dropdown' } }}
+          .value=${this._daily_forecast_days !== null ? this._daily_forecast_days.toString() : ''}
+          .configValue=${'daily_forecast_days'}
+          @value-changed=${this._valueChangedNumber}></ha-selector>
+        ${this._daily_forecast_layout === 'vertical' ? html`
+          <ha-selector .hass=${this.hass} .label=${'Daily Extended Days'}
+            .selector=${{ select: { options: [
+              { value: '0', label: '0' }, { value: '1', label: '1' }, { value: '2', label: '2' },
+              { value: '3', label: '3' }, { value: '4', label: '4' }, { value: '5', label: '5' },
+              { value: '6', label: '6' }, { value: '7', label: '7' },
+            ], mode: 'dropdown' } }}
+            .value=${this._daily_extended_forecast_days !== null ? this._daily_extended_forecast_days.toString() : ''}
+            .configValue=${'daily_extended_forecast_days'}
+            @value-changed=${this._valueChangedNumber}></ha-selector>
+        ` : html`<div></div>`}
       </div>
 
         <div class="side-by-side">
@@ -1361,21 +1346,25 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
         <div></div>
       </div>
       <div class="side-by-side">
-        <ha-select label="Time Format" .configValue=${'option_time_format'} .value=${this._option_time_format} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          <mwc-list-item></mwc-list-item>
-          <mwc-list-item value="system">System</mwc-list-item>
-          <mwc-list-item value="12hour">12 hour</mwc-list-item>
-          <mwc-list-item value="24hour">24 hour</mwc-list-item>
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Time Format'}
+          .selector=${{ select: { options: [
+            { value: 'system', label: 'System' },
+            { value: '12hour', label: '12 hour' },
+            { value: '24hour', label: '24 hour' },
+          ], mode: 'dropdown' } }}
+          .value=${this._option_time_format} .configValue=${'option_time_format'}
+          @value-changed=${this._valueChanged}></ha-selector>
         <ha-textfield label="Locale" .value=${this._option_locale} .configValue=${'option_locale'} @input=${this._valueChanged}>
         </ha-textfield>
       </div>
       <div class="side-by-side">
-        <ha-select label="Unit System" .configValue=${'unit_system'} .value=${this._unit_system} @closed=${(ev: { stopPropagation: () => any; }) => ev.stopPropagation()}>
-          <mwc-list-item></mwc-list-item>
-          <mwc-list-item value="metric">Metric</mwc-list-item>
-          <mwc-list-item value="imperial">Imperial</mwc-list-item>
-        </ha-select>
+        <ha-selector .hass=${this.hass} .label=${'Unit System'}
+          .selector=${{ select: { options: [
+            { value: 'metric', label: 'Metric' },
+            { value: 'imperial', label: 'Imperial' },
+          ], mode: 'dropdown' } }}
+          .value=${this._unit_system} .configValue=${'unit_system'}
+          @value-changed=${this._valueChanged}></ha-selector>
         <div></div>
       </div>
     `;
@@ -1680,54 +1669,6 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
       }
     }
     fireEvent(this, 'config-changed', { config: this.sortObjectByKeys(this._config) });
-  }
-
-  // ha-select dropdown items render in a portal outside the shadow DOM, so click events
-  // on items don't bubble through ha-select to any listener attached to it. A document-level
-  // click listener polls ha-select values after every click to detect changes.
-  private _handleGlobalClick = (): void => {
-    if (!this._config || !this.hass) return;
-    // Defer so ha-select can process the click and update its value before we read it.
-    setTimeout(() => {
-      if (!this._config || !this.hass) return;
-      this._pollSelectValues();
-    }, 0);
-  };
-
-  private _pollSelectValues(): void {
-    if (!this._config || !this.hass) return;
-    const numberConfigs = new Set(['option_pressure_decimals', 'daily_forecast_days', 'daily_extended_forecast_days']);
-    let changed = false;
-    const newConfig = { ...this._config };
-    this.renderRoot.querySelectorAll('ha-select').forEach((el: any) => {
-      const configValue = el.configValue;
-      const value = el.value;
-      if (!configValue) return;
-      // Compare against stored config directly (not the getter which may apply a display default)
-      const stored = this._config?.[configValue] ?? '';
-      const storedStr = stored !== null && stored !== undefined ? stored.toString() : '';
-      if (storedStr === value) return;
-      changed = true;
-      if (value === '' || value === null || value === undefined) {
-        delete newConfig[configValue];
-      } else {
-        newConfig[configValue] = numberConfigs.has(configValue) ? Number(value) : value;
-      }
-    });
-    if (changed) {
-      this._config = newConfig as typeof this._config;
-      fireEvent(this, 'config-changed', { config: this.sortObjectByKeys(this._config) });
-    }
-  }
-
-  override connectedCallback(): void {
-    super.connectedCallback();
-    document.addEventListener('click', this._handleGlobalClick);
-  }
-
-  override disconnectedCallback(): void {
-    super.disconnectedCallback();
-    document.removeEventListener('click', this._handleGlobalClick);
   }
 
   static styles: CSSResultGroup = css`
