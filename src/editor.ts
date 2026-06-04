@@ -1687,6 +1687,15 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
   // click listener polls ha-select values after every click to detect changes.
   private _handleGlobalClick = (): void => {
     if (!this._config || !this.hass) return;
+    // Defer so ha-select can process the click and update its value before we read it.
+    setTimeout(() => {
+      if (!this._config || !this.hass) return;
+      this._pollSelectValues();
+    }, 0);
+  };
+
+  private _pollSelectValues(): void {
+    if (!this._config || !this.hass) return;
     const numberConfigs = new Set(['option_pressure_decimals', 'daily_forecast_days', 'daily_extended_forecast_days']);
     let changed = false;
     const newConfig = { ...this._config };
@@ -1694,7 +1703,10 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
       const configValue = el.configValue;
       const value = el.value;
       if (!configValue) return;
-      if (this[`_${configValue}`] === value) return;
+      // Compare against stored config directly (not the getter which may apply a display default)
+      const stored = this._config?.[configValue] ?? '';
+      const storedStr = stored !== null && stored !== undefined ? stored.toString() : '';
+      if (storedStr === value) return;
       changed = true;
       if (value === '' || value === null || value === undefined) {
         delete newConfig[configValue];
@@ -1703,10 +1715,10 @@ export class WeatherCardEditor extends LitElement implements LovelaceCardEditor 
       }
     });
     if (changed) {
-      this._config = newConfig;
+      this._config = newConfig as typeof this._config;
       fireEvent(this, 'config-changed', { config: this.sortObjectByKeys(this._config) });
     }
-  };
+  }
 
   override connectedCallback(): void {
     super.connectedCallback();
